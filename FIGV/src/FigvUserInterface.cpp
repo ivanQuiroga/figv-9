@@ -17,6 +17,7 @@
 #include "imgui_impl_glfw.h"
 #include "FigvRenderer.h"
 #include "FigvScene.h"
+#include <filesystem>
 
 FigvUserInterface::FigvUserInterface(GLFWwindow* associatedWindow) {
     
@@ -84,7 +85,7 @@ void FigvUserInterface::prepareInterfaceObjects() {
 void FigvUserInterface::preparePalettes() {
     
     const char* shaderList[] = { "Normals", "Cartoon" };
-    const char* modelList[] = { "Spot", "Bob", "Blub", "Spot HD", "Blub HD" };
+    FigvUserInterface::updateModelNamesCStr();
     
     ImGui::Begin("FIGV properties");
     
@@ -127,8 +128,24 @@ void FigvUserInterface::preparePalettes() {
         ImGui::Spacing();
     }
 
-    ImGui::SeparatorText("Models properties");
-    ImGui::Combo("Model", FigvScene::getInstance()->getModelSelectedip(), modelList, IM_ARRAYSIZE(modelList));
+    ImGui::SeparatorText("Models properties");    
+    if (ImGui::Button("Import Model")) {
+        ImGui::SetNextWindowSize(ImVec2(700, 400));
+        ImGuiFileDialog::Instance()->OpenDialog("ChooseModelDlgKey", "Choose Model", ".obj", ".");
+    }
+    if (ImGuiFileDialog::Instance()->Display("ChooseModelDlgKey")) {
+        if (ImGuiFileDialog::Instance()->IsOk()) {
+            std::string modelPath = ImGuiFileDialog::Instance()->GetFilePathName();
+            FigvScene::getInstance()->importDefaultModel(modelPath);          
+            std::filesystem::path filePath(modelPath);
+            std::string modelName = filePath.stem().string();
+            modelNames.push_back(modelName);
+            *FigvScene::getInstance()->getModelSelectedip() = static_cast<int>(modelNames.size()) - 1;
+        }
+        ImGuiFileDialog::Instance()->Close();
+    }
+    ImGui::Combo("Model", FigvScene::getInstance()->getModelSelectedip(), modelNamesCStr.data(), modelNamesCStr.size());  
+    //ImGui::Combo("Model", FigvScene::getInstance()->getModelSelectedip(), modelList, IM_ARRAYSIZE(modelList));
     
     ImGui::SeparatorText("Light source properties");
     ImGui::RadioButton("Scene lights", FigvScene::getInstance()->getUseModelingLightip(), 0); ImGui::SameLine();
@@ -147,4 +164,12 @@ void FigvUserInterface::preparePalettes() {
 // que construye esos widgets se encuentra en el archivo: imgui_demo.cpp
     
 // ImGui::ShowDemoWindow();
+}
+
+
+void FigvUserInterface::updateModelNamesCStr() {
+    modelNamesCStr.clear();
+    for (const auto& name : modelNames) {
+        modelNamesCStr.push_back(name.c_str());
+    }
 }

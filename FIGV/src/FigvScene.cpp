@@ -24,25 +24,25 @@ FigvScene::FigvScene() {
     models = std::vector<Figv3DModel>();
     
     glm::mat4 R;
-    // FIGV 15
+    // FIGV 15   
     R = glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0));
-    models.push_back(Figv3DModel("./resources/models/spot/spot_trg.obj",
+    FigvScene::importModel("./resources/models/spot/spot_trg.obj",
                                  new FigvMaterial(64.0, glm::vec3(1.0, 0.75, 0.75), glm::vec3(1.0)),
-                                 R));
+                                 R);
     R = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
-    models.push_back(Figv3DModel("./resources/models/bob/bob_trg.obj",
+    FigvScene::importModel("./resources/models/bob/bob_trg.obj",
                                  new FigvMaterial(),
-                                 R));
-    models.push_back(Figv3DModel("./resources/models/blub/blub_trg.obj",
+                                 R);
+    FigvScene::importModel("./resources/models/blub/blub_trg.obj",
                                  new FigvMaterial(256.0, glm::vec3(0.4, 0.6, 1.0), glm::vec3(1.0)),
-                                 glm::mat4(1.0)));
+                                 glm::mat4(1.0));
     R = glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0));
-    models.push_back(Figv3DModel("./resources/models/spot/spot_trg_2.obj",
+    FigvScene::importModel("./resources/models/spot/spot_trg_2.obj",
                                  new FigvMaterial(64.0, glm::vec3(1.0, 0.75, 0.75), glm::vec3(1.0)),
-                                 R));
-    models.push_back(Figv3DModel("./resources/models/blub/blub_trg_2.obj",
+                                 R);
+    FigvScene::importModel("./resources/models/blub/blub_trg_2.obj",
                                  new FigvMaterial(256.0, glm::vec3(0.4, 0.6, 1.0), glm::vec3(1.0)),
-                                 glm::mat4(1.0)));
+                                 glm::mat4(1.0));
 
     lightSource = new FigvLightSource();
 }
@@ -77,6 +77,20 @@ void FigvScene::trackCamera(float rightOffset, float upOffset) {
 
 void FigvScene::zoomCamera(float deltaFovX) {
     FigvScene::getInstance()->camera->zoom(deltaFovX);
+}
+
+void FigvScene::importModel(const std::string& modelPath, FigvMaterial* material,
+                         glm::mat4 transform) {
+    models.push_back(Figv3DModel(modelPath, material, transform));
+}
+
+void FigvScene::importDefaultModel(const std::string& modelPath) {
+    FigvScene::importModel(modelPath, 
+                            new FigvMaterial(32.0,           
+                                                glm::vec3(1.0),   
+                                                glm::vec3(1.0)    
+                                            ),
+                                            glm::mat4(1.0));
 }
 
 void FigvScene::applyCameraPosition(FigvShader shader) {

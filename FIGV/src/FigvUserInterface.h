@@ -15,6 +15,7 @@
 #define FigvUserInterface_h
 
 #include <GLFW/glfw3.h>
+#include "ImGuiFileDialog/ImGuiFileDialog.h"
 
 class FigvUserInterface {
     
@@ -26,6 +27,7 @@ public:
     void preRenderActions();
     void afterRenderActions();
     void prepareInterfaceObjects();
+    void updateModelNamesCStr();
 
 private:
     
@@ -33,6 +35,9 @@ private:
     const char* glsl_version;
     
     bool darkMode;
+
+    std::vector<const char*> modelNamesCStr;
+    std::vector<std::string> modelNames = {"Spot", "Bob", "Blub", "Spot HD", "Blub HD"};
 
     void preparePalettes();
 };
