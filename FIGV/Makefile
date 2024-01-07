@@ -46,10 +46,10 @@ RM = "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Common
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9-start\FIGV"
+CMAKE_SOURCE_DIR = "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9\figv-9\FIGV"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9-start\FIGV"
+CMAKE_BINARY_DIR = "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9\figv-9\FIGV"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -76,9 +76,9 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9-start\FIGV\CMakeFiles" "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9-start\FIGV\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9\figv-9\FIGV\CMakeFiles" "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9\figv-9\FIGV\\CMakeFiles\progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9-start\FIGV\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\UGR\OneDrive - UNIVERSIDAD DE GRANADA\Documentos\OpenGL\FIGV\FIGV-App\FIGV-9\figv-9\FIGV\CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -141,6 +141,30 @@ C_\usr\glad\src\glad.s: C_\usr\glad\src\glad.c.s
 C_\usr\glad\src\glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\FIGV.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\FIGV.dir\C_\usr\glad\src\glad.c.s
 .PHONY : C_\usr\glad\src\glad.c.s
+
+lib\ImGuiFileDialog\ImGuiFileDialog.obj: lib\ImGuiFileDialog\ImGuiFileDialog.cpp.obj
+.PHONY : lib\ImGuiFileDialog\ImGuiFileDialog.obj
+
+# target to build an object file
+lib\ImGuiFileDialog\ImGuiFileDialog.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\FIGV.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\FIGV.dir\lib\ImGuiFileDialog\ImGuiFileDialog.cpp.obj
+.PHONY : lib\ImGuiFileDialog\ImGuiFileDialog.cpp.obj
+
+lib\ImGuiFileDialog\ImGuiFileDialog.i: lib\ImGuiFileDialog\ImGuiFileDialog.cpp.i
+.PHONY : lib\ImGuiFileDialog\ImGuiFileDialog.i
+
+# target to preprocess a source file
+lib\ImGuiFileDialog\ImGuiFileDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\FIGV.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\FIGV.dir\lib\ImGuiFileDialog\ImGuiFileDialog.cpp.i
+.PHONY : lib\ImGuiFileDialog\ImGuiFileDialog.cpp.i
+
+lib\ImGuiFileDialog\ImGuiFileDialog.s: lib\ImGuiFileDialog\ImGuiFileDialog.cpp.s
+.PHONY : lib\ImGuiFileDialog\ImGuiFileDialog.s
+
+# target to generate assembly for a file
+lib\ImGuiFileDialog\ImGuiFileDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\FIGV.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\FIGV.dir\lib\ImGuiFileDialog\ImGuiFileDialog.cpp.s
+.PHONY : lib\ImGuiFileDialog\ImGuiFileDialog.cpp.s
 
 lib\imgui\backends\imgui_impl_glfw.obj: lib\imgui\backends\imgui_impl_glfw.cpp.obj
 .PHONY : lib\imgui\backends\imgui_impl_glfw.obj
@@ -658,6 +682,9 @@ help:
 	@echo ... C_/usr/glad/src/glad.obj
 	@echo ... C_/usr/glad/src/glad.i
 	@echo ... C_/usr/glad/src/glad.s
+	@echo ... lib/ImGuiFileDialog/ImGuiFileDialog.obj
+	@echo ... lib/ImGuiFileDialog/ImGuiFileDialog.i
+	@echo ... lib/ImGuiFileDialog/ImGuiFileDialog.s
 	@echo ... lib/imgui/backends/imgui_impl_glfw.obj
 	@echo ... lib/imgui/backends/imgui_impl_glfw.i
 	@echo ... lib/imgui/backends/imgui_impl_glfw.s

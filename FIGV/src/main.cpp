@@ -32,6 +32,10 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     FigvScene::setFrameSize(width, height);
 }
 
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    FigvEventManager::getInstance()->processKeyClick(window, key, scancode, action, mods);
+}
+
 int main(int argc, const char * argv[]) {
 
     FigvLog("main", __LINE__, "Starting application");
@@ -47,6 +51,7 @@ int main(int argc, const char * argv[]) {
     glfwSetMouseButtonCallback(windowSystem->getAppWindow(), mouseButtonCallback);
     glfwSetCursorPosCallback(windowSystem->getAppWindow(), cursorPosCallback);
     glfwSetFramebufferSizeCallback(windowSystem->getAppWindow(), framebufferSizeCallback);
+    glfwSetKeyCallback(windowSystem->getAppWindow(), keyCallback);
     
     while (!windowSystem->getWindowShouldClose()) {
 

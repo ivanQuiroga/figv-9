@@ -109,6 +109,23 @@ void FigvCamera::dolly(float distance) {
     position += V;
 }
 
+// Función para el movimiento de cámara Track
+void FigvCamera::track(float rightOffset, float upOffset) {
+    // Calcular el desplazamiento en cada dirección
+    glm::vec3 rightMovement = vV * rightOffset; // vV es el vector Right
+    glm::vec3 upMovement = vU * upOffset;       // vU es el vector Up
+
+    // Aplicar el desplazamiento a la posición de la cámara y al punto de mira
+    position += rightMovement + upMovement;
+    lookAt += rightMovement + upMovement;
+}
+
+//Función para el Zoom 
+void FigvCamera::zoom(float deltaFovX) {
+    fovX += deltaFovX;
+    fovX = glm::max(1.0f, glm::min(fovX, 179.0f)); // Limita el fovX entre 1 y 179 grados
+}
+
 glm::mat4 FigvCamera::getViewProjectionMatrix() {
     
     float fovY = 2.0f * atanf( tanf( glm::radians(fovX)/2.0f) / aspect);

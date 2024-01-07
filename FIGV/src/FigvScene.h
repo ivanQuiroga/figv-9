@@ -30,6 +30,8 @@ public:
     static void orbitCamera(float movementX, float movementY);
     static void panCamera(float movementX, float movementY);
     static void dollyCamera(float distance);
+    static void trackCamera(float rightOffset, float upOffset);
+    static void zoomCamera(float deltaFovX);
     static void applyCameraPosition(FigvShader shader);
 
     static void drawScene(FigvShader shader);

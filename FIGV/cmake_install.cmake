@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/UGR/OneDrive - UNIVERSIDAD DE GRANADA/Documentos/OpenGL/FIGV/FIGV-App/FIGV-9-start/FIGV
+# Install script for directory: C:/Users/UGR/OneDrive - UNIVERSIDAD DE GRANADA/Documentos/OpenGL/FIGV/FIGV-App/FIGV-9/figv-9/FIGV
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/UGR/OneDrive - UNIVERSIDAD DE GRANADA/Documentos/OpenGL/FIGV/FIGV-App/FIGV-9-start/FIGV/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/UGR/OneDrive - UNIVERSIDAD DE GRANADA/Documentos/OpenGL/FIGV/FIGV-App/FIGV-9/figv-9/FIGV/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

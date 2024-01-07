@@ -24,7 +24,9 @@ public:
 
     void orbit(float movementX, float movementY);
     void pan(float movementX, float movementY);
-    void dolly(float distance);
+    void dolly(float distance);    
+    void track(float rightOffset, float upOffset);
+    void zoom(float deltaFovX);
     
     glm::mat4 getViewProjectionMatrix();
     glm::vec3 getPosition();
