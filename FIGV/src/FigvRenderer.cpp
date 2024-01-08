@@ -30,6 +30,8 @@ FigvRenderer::FigvRenderer() {
                                      "./resources/shaders/FigvNormalFragment.glsl"));
     shaders.push_back(new FigvShader("./resources/shaders/FigvCartoonVertex.glsl",
                                      "./resources/shaders/FigvCartoonFragment.glsl"));
+    shaders.push_back(new FigvShader("./resources/shaders/FigvHemisphericLightingVertex.glsl",
+                                     "./resources/shaders/FigvHemisphericLightingFragment.glsl"));
 
     scaledNormal = false;
     
@@ -84,7 +86,11 @@ void FigvRenderer::render() {
             // FIGV 19
             getInstance()->shaders[shaderActive]->setUniform("useTexture", useTexture);
             break;
-            
+        case 2:
+            getInstance()->shaders[shaderActive]->setUniform("skyColor", skyColor);
+            getInstance()->shaders[shaderActive]->setUniform("groundColor", groundColor);
+            getInstance()->shaders[shaderActive]->setUniform("lightDirection", lightDirection);
+            break;
         default:
             break;
     }
@@ -131,4 +137,16 @@ float* FigvRenderer::getCartoonThresholdfp() {
 // FIGV 20
 bool* FigvRenderer::getUseTexturebp() {
     return &useTexture;
+}
+
+glm::vec3* FigvRenderer::getSkyColor3fv() {
+    return &skyColor;
+}
+
+glm::vec3* FigvRenderer::getGroundColor3fv() {
+    return &groundColor;
+}
+
+glm::vec3* FigvRenderer::getLightDirection3fv() {
+    return &lightDirection;
 }

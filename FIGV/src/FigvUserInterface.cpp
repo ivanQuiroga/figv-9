@@ -84,7 +84,7 @@ void FigvUserInterface::prepareInterfaceObjects() {
 
 void FigvUserInterface::preparePalettes() {
     
-    const char* shaderList[] = { "Normals", "Cartoon" };    
+    const char* shaderList[] = { "Normals", "Cartoon", "Hemispheric Lighting" };    
 
     FigvUserInterface::updateModelNamesCStr();
     
@@ -126,6 +126,18 @@ void FigvUserInterface::preparePalettes() {
         ImGui::InputInt("Levels", FigvRenderer::getInstance()->getCartoonLevelsip(), 1, 1);
         ImGui::InputFloat("Multiplier", FigvRenderer::getInstance()->getCartoonMultiplierfp(), 0.1f, 1.0f, "%.1f");
         ImGui::InputFloat("Threshold", FigvRenderer::getInstance()->getCartoonThresholdfp(), 0.1f, 1.0f, "%.1f");
+        ImGui::TreePop();
+        ImGui::Spacing();
+    }
+
+    if (ImGui::TreeNode("Hemispheric Lighting shader properties")) {
+        ImGui::ColorEdit3("Sky Color", &FigvRenderer::getInstance()->getSkyColor3fv()->r);
+        ImGui::ColorEdit3("Ground Color", &FigvRenderer::getInstance()->getGroundColor3fv()->r);
+        glm::vec3* lightDir = FigvRenderer::getInstance()->getLightDirection3fv();
+        ImGui::Text("Light Direction");
+        ImGui::SliderFloat("X", &lightDir->x, -1.0f, 1.0f);
+        ImGui::SliderFloat("Y", &lightDir->y, -1.0f, 1.0f);
+        ImGui::SliderFloat("Z", &lightDir->z, -1.0f, 1.0f);
         ImGui::TreePop();
         ImGui::Spacing();
     }

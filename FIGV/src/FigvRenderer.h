@@ -43,6 +43,10 @@ public:
     
     // FIGV 17
     bool* getUseTexturebp();
+
+    glm::vec3* getSkyColor3fv();
+    glm::vec3* getGroundColor3fv();
+    glm::vec3* getLightDirection3fv();
     
 private:
     
@@ -67,6 +71,11 @@ private:
     
     // FIGV 16
     bool useTexture;
+    
+    glm::vec3 skyColor{0.2f, 0.3f, 0.5f}; 
+    glm::vec3 groundColor{0.1f, 0.1f, 0.1f}; 
+    glm::vec3 lightDirection{0.0f, 1.0f, 0.0f}; 
+    
 };
 
 #endif /* FigvRenderer_h */
