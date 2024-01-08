@@ -28,20 +28,25 @@ FigvScene::FigvScene() {
     R = glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0));
     FigvScene::importModel("./resources/models/spot/spot_trg.obj",
                                  new FigvMaterial(64.0, glm::vec3(1.0, 0.75, 0.75), glm::vec3(1.0)),
+                                 "./resources/models/spot/spot_texture.png",
                                  R);
     R = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
     FigvScene::importModel("./resources/models/bob/bob_trg.obj",
                                  new FigvMaterial(),
+                                 "./resources/models/bob/bob_teaser.png",
                                  R);
     FigvScene::importModel("./resources/models/blub/blub_trg.obj",
                                  new FigvMaterial(256.0, glm::vec3(0.4, 0.6, 1.0), glm::vec3(1.0)),
+                                 "./resources/models/blub/blub_texture.png",
                                  glm::mat4(1.0));
     R = glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0));
     FigvScene::importModel("./resources/models/spot/spot_trg_2.obj",
                                  new FigvMaterial(64.0, glm::vec3(1.0, 0.75, 0.75), glm::vec3(1.0)),
+                                 "./resources/models/spot/spot_texture.png",
                                  R);
     FigvScene::importModel("./resources/models/blub/blub_trg_2.obj",
                                  new FigvMaterial(256.0, glm::vec3(0.4, 0.6, 1.0), glm::vec3(1.0)),
+                                 "./resources/models/blub/blub_texture.png",
                                  glm::mat4(1.0));
 
     lightSource = new FigvLightSource();
@@ -79,17 +84,18 @@ void FigvScene::zoomCamera(float deltaFovX) {
     FigvScene::getInstance()->camera->zoom(deltaFovX);
 }
 
-void FigvScene::importModel(const std::string& modelPath, FigvMaterial* material,
+void FigvScene::importModel(const std::string& modelPath, FigvMaterial* material, const std::string texturePath, 
                          glm::mat4 transform) {
-    models.push_back(Figv3DModel(modelPath, material, transform));
+    models.push_back(Figv3DModel(modelPath, material, texturePath, transform));
 }
 
-void FigvScene::importDefaultModel(const std::string& modelPath) {
+void FigvScene::importDefaultModel(const std::string& modelPath, const std::string& texturePath) {
     FigvScene::importModel(modelPath, 
                             new FigvMaterial(32.0,           
                                                 glm::vec3(1.0),   
                                                 glm::vec3(1.0)    
                                             ),
+                                            texturePath,
                                             glm::mat4(1.0));
 }
 

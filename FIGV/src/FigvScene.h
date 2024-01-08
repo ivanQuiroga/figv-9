@@ -37,8 +37,8 @@ public:
     static void drawScene(FigvShader shader);
     static void setFrameSize(int width, int height);
 
-    void importModel(const std::string& modelPath, FigvMaterial* material, glm::mat4 transform);
-    void importDefaultModel(const std::string& modelPath);
+    void importModel(const std::string& modelPath, FigvMaterial* material, const std::string texturePath, glm::mat4 transform);
+    void importDefaultModel(const std::string& modelPath, const std::string& texturePath);
 
     float* getIa3fp();
     FigvLightSource* getLightSource();

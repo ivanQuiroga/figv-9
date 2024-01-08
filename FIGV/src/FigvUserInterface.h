@@ -38,6 +38,8 @@ private:
 
     std::vector<const char*> modelNamesCStr;
     std::vector<std::string> modelNames = {"Spot", "Bob", "Blub", "Spot HD", "Blub HD"};
+    std::string modelPath;
+    std::string texturePath;
 
     void preparePalettes();
 };

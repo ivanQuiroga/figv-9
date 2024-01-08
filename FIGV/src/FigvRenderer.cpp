@@ -34,6 +34,7 @@ FigvRenderer::FigvRenderer() {
     scaledNormal = false;
     
     // FIGV 18
+    useTexture = true;
 }
 
 FigvRenderer::~FigvRenderer() {
@@ -81,6 +82,7 @@ void FigvRenderer::render() {
             getInstance()->shaders[shaderActive]->setUniform("multiplier", cartoonMultiplier);
             getInstance()->shaders[shaderActive]->setUniform("threshold", cartoonThreshold);
             // FIGV 19
+            getInstance()->shaders[shaderActive]->setUniform("useTexture", useTexture);
             break;
             
         default:
@@ -127,3 +129,6 @@ float* FigvRenderer::getCartoonThresholdfp() {
 }
 
 // FIGV 20
+bool* FigvRenderer::getUseTexturebp() {
+    return &useTexture;
+}

@@ -20,6 +20,7 @@
 #include "FigvMesh.h"
 #include "FigvMaterial.h"
 // FIGV 9
+#include "FigvTexture.h"
 
 class Figv3DModel {
     
@@ -27,7 +28,7 @@ public:
 
     // FIGV 11
     Figv3DModel(std::string path, FigvMaterial* material,
-                glm::mat4 transform);
+                    std::string texturePath, glm::mat4 transform);
     void draw(FigvShader shader);
 
 private:
@@ -36,6 +37,7 @@ private:
     
     FigvMaterial* material;
     // FIGV 10
+    FigvTexture* albedo;
     
     glm::mat4 transform;
 

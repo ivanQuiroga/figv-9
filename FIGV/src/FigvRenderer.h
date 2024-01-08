@@ -42,6 +42,7 @@ public:
     float* getCartoonThresholdfp();
     
     // FIGV 17
+    bool* getUseTexturebp();
     
 private:
     
@@ -65,6 +66,7 @@ private:
     float cartoonThreshold = 0.4;
     
     // FIGV 16
+    bool useTexture;
 };
 
 #endif /* FigvRenderer_h */

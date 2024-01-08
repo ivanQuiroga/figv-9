@@ -17,12 +17,13 @@
 
 // FIGV 12
 Figv3DModel::Figv3DModel(std::string path, FigvMaterial* material,
-                         glm::mat4 transform) {
+                            std::string texturePath, glm::mat4 transform) {
     
     loadModel(path);
     this->material = material;
     this->transform = transform;
     // FIGV 13
+    this->albedo = new FigvTexture(texturePath);
 }
 
 void Figv3DModel::draw(FigvShader shader) {
@@ -43,8 +44,8 @@ void Figv3DModel::loadModel(std::string path) {
                                              aiProcess_FlipUVs);
     if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
     {
-        FigvLog("FigvModel", __LINE__, "Error: Assimp");
-        FigvLog("FigvModel", __LINE__, importer.GetErrorString());
+        FigvLog("Figv3DModel", __LINE__, "Error: Assimp");
+        FigvLog("Figv3DModel", __LINE__, importer.GetErrorString());
         return;
     }
 

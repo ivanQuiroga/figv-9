@@ -84,7 +84,8 @@ void FigvUserInterface::prepareInterfaceObjects() {
 
 void FigvUserInterface::preparePalettes() {
     
-    const char* shaderList[] = { "Normals", "Cartoon" };
+    const char* shaderList[] = { "Normals", "Cartoon" };    
+
     FigvUserInterface::updateModelNamesCStr();
     
     ImGui::Begin("FIGV properties");
@@ -95,6 +96,7 @@ void FigvUserInterface::preparePalettes() {
     ImGui::SeparatorText("Rendering properties");
     ImGui::ColorEdit3("Background", FigvRenderer::getInstance()->getBackgroundColor3fp());
     // FIGV 21
+    ImGui::Checkbox("Use texture", FigvRenderer::getInstance()->getUseTexturebp());
     ImGui::RadioButton("Fill", FigvRenderer::getInstance()->getRenderingModeip(), GL_FILL); ImGui::SameLine();
     ImGui::RadioButton("Line", FigvRenderer::getInstance()->getRenderingModeip(), GL_LINE); ImGui::SameLine();
     ImGui::RadioButton("Point", FigvRenderer::getInstance()->getRenderingModeip(), GL_POINT); ImGui::SameLine();
@@ -135,8 +137,21 @@ void FigvUserInterface::preparePalettes() {
     }
     if (ImGuiFileDialog::Instance()->Display("ChooseModelDlgKey")) {
         if (ImGuiFileDialog::Instance()->IsOk()) {
-            std::string modelPath = ImGuiFileDialog::Instance()->GetFilePathName();
-            FigvScene::getInstance()->importDefaultModel(modelPath);          
+            modelPath = ImGuiFileDialog::Instance()->GetFilePathName();      
+            FigvLog("FigvUserInterface", __LINE__, "Selected model: " + modelPath);   
+            ImGuiFileDialog::Instance()->Close();   
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseTextureDlgKey", "Choose Texture", ".png,.jpg,.jpeg", ".");
+        }else{
+            modelPath.clear(); 
+            ImGuiFileDialog::Instance()->Close();
+        }
+        ImGui::SetNextWindowSize(ImVec2(700, 400));
+    }
+    if (ImGuiFileDialog::Instance()->Display("ChooseTextureDlgKey")) {
+        if (ImGuiFileDialog::Instance()->IsOk()) {
+            texturePath = ImGuiFileDialog::Instance()->GetFilePathName();
+            FigvLog("FigvUserInterface", __LINE__, "Selected texture: " + texturePath);  
+            FigvScene::getInstance()->importDefaultModel(modelPath, texturePath);
             std::filesystem::path filePath(modelPath);
             std::string modelName = filePath.stem().string();
             modelNames.push_back(modelName);
@@ -145,8 +160,7 @@ void FigvUserInterface::preparePalettes() {
         ImGuiFileDialog::Instance()->Close();
     }
     ImGui::Combo("Model", FigvScene::getInstance()->getModelSelectedip(), modelNamesCStr.data(), modelNamesCStr.size());  
-    //ImGui::Combo("Model", FigvScene::getInstance()->getModelSelectedip(), modelList, IM_ARRAYSIZE(modelList));
-    
+
     ImGui::SeparatorText("Light source properties");
     ImGui::RadioButton("Scene lights", FigvScene::getInstance()->getUseModelingLightip(), 0); ImGui::SameLine();
     ImGui::RadioButton("Modeling light", FigvScene::getInstance()->getUseModelingLightip(), 1);
